@@ -31,6 +31,7 @@ namespace BlazorLeaflet
                 Polygon polygon => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolygon", mapId, polygon, DotNetObjectReference.Create(polygon)),
                 Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolyline", mapId, polyline, DotNetObjectReference.Create(polyline)),
                 ImageLayer image => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addImageLayer", mapId, image, DotNetObjectReference.Create(image)),
+                DebugGridLayer debugGridLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addDebugLayer", mapId, debugGridLayer, DotNetObjectReference.Create(debugGridLayer)),
                 _ => throw new NotImplementedException($"The layer {typeof(Layer).Name} has not been implemented."),
             };
 

@@ -32,6 +32,24 @@ window.leafletBlazor = {
         return !!maps[mapId];
         
     },
+    addDebugLayer: function(mapId) {
+        L.GridLayer.GridDebug = L.GridLayer.extend({
+            createTile: function (coords) {
+                const tile = document.createElement('div');
+                tile.style.outline = '1px solid green';
+                tile.style.fontWeight = 'bold';
+                tile.style.fontSize = '14pt';
+                tile.innerHTML = [coords.z, coords.x, coords.y].join('/');
+                return tile;
+            },
+        });
+
+        L.gridLayer.gridDebug = function (opts) {
+            return new L.GridLayer.GridDebug(opts);
+        };
+
+        maps[mapId].addLayer(L.gridLayer.gridDebug());
+    },
     addTilelayer: function (mapId, tileLayer, objectReference) {
         const layer = L.tileLayer(tileLayer.urlTemplate, {
             attribution: tileLayer.attribution,
